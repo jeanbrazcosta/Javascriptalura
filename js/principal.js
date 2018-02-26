@@ -18,7 +18,7 @@ if(peso <= 0 || peso > 1000){
     console.log("Peso inválido");
     tdImc.textContent = "Peso inválido!";
     pesoEhValido = false;
-	paciente.classList.add(paciente-invalido");
+	paciente.classList.add("paciente-invalido");
 }
 
 if(altura <= 0 || altura >= 3){
