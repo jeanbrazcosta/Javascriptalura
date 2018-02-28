@@ -4,15 +4,9 @@ var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida nutricionista";
 //Selecionando todos os pacientes atráve´s da classe paciente
 var pacientes = document.querySelectorAll(".paciente");
-//adicioando função para escutar clicke no título
+//adicionando função para escutar clicke no título
 titulo.addEventListener("click", function() {
 	console.log("fui clicado")
-});
-
-var botaoadicionar = document.querySelector("#adicionar-paciente");
-botaoadicionar.addEventListener("click", function (event) {
-	event.preventDefault();
-	console.log("agora recebi click no botão");
 });
 //percorrendo todos os pacientes
 for (var i = 0; i<pacientes.length; i++) {
