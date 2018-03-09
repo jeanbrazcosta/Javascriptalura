@@ -1,48 +1,68 @@
-//Criando variável e selecionando titulo da tag h1 da página
+//selecionando titulo
 var titulo = document.querySelector(".titulo");
-//Trocando texto e usando a propriedade textContent
-titulo.textContent = "Aparecida nutricionista";
-//Selecionando todos os pacientes atráve´s da classe paciente
+//trocando conteúdo
+titulo.textContent = "Aparecida Nutricionista";
+//selecionando todos os pacientes que comtem a classe paciente.
 var pacientes = document.querySelectorAll(".paciente");
-//adicionando função para escutar clicke no título
-titulo.addEventListener("click", function() {
-	console.log("fui clicado")
-});
 //percorrendo todos os pacientes
-for (var i = 0; i<pacientes.length; i++) {
-//atribuindo a variável paciente os pacientes
-var paciente = pacientes [i];
-//selecionando peso
-var tdPeso = paciente.querySelector(".info-peso");
-//selecionando altura
-var tdAltura = paciente.querySelector(".info-altura");
-//selecionando imc
-var tdImc = paciente.querySelector(".info-imc");
-//pegando conteúdo da tag e não tod a tag
-var peso = tdPeso.textContent;
-var altura = tdAltura.textContent;
-//variáveis de comparação que será usada no if
-var alturaEhValida = true;
-var pesoEhValido = true;
+for (var i = 0; i < pacientes.length; i++) {
 
-if(peso <= 0 || peso > 1000){
-    console.log("Peso inválido");
-    tdImc.textContent = "Peso inválido!";
-    pesoEhValido = false;
-	//adicionando classe que foi criado no arquivo css.
-	paciente.classList.add("paciente-invalido");
+    var paciente = pacientes[i];
+
+    var tdPeso = paciente.querySelector(".info-peso");
+    var peso = tdPeso.textContent;
+
+    var tdAltura = paciente.querySelector(".info-altura");
+    var altura = tdAltura.textContent;
+
+    var tdImc = paciente.querySelector(".info-imc");
+//passando a função para validar peso e altura
+    var pesoEhValido = validaPeso(peso);
+    var alturaEhValida = validaAltura(altura);
+
+    if (!pesoEhValido) {
+        console.log("Peso inválido!");
+        pesoEhValido = false;
+        tdImc.textContent = "Peso inválido";
+        //adicioando a classe
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if (!alturaEhValida) {
+        console.log("Altura inválida!");
+        alturaEhValida = false;
+        tdImc.textContent = "Altura inválida";
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if (pesoEhValido && alturaEhValida) {
+        var imc = calculaImc(peso, altura);
+        tdImc.textContent = imc;
+    }
 }
 
-if(altura <= 0 || altura >= 3){
-    console.log("Altura inválida");
-    tdImc.textContent = "Altura inválida!";
-    alturaEhValida = false;
-	paciente.classList.add("paciente-invalido");
+function calculaImc(peso, altura) {
+    var imc = 0;
+    imc = peso / (altura * altura);
+
+    retornando com duas casas decimais
+    return imc.toFixed(2);
 }
 
-if(pesoEhValido && alturaEhValida){
-    var imc = peso / ( altura * altura);    
-    //trocando conteúdo do imc e fixando para aparecer somente duas casas decimais.
-    tdImc.textContent = imc.toFixed(2);
+function validaPeso(peso) {
+
+    if (peso >= 0 && peso <= 1000) {
+        return true;
+    } else {
+        return false;
+    }
 }
+
+function validaAltura(altura) {
+
+    if (altura >= 0 && altura <= 3.00) {
+        return true;
+    } else {
+        return false;
+    }
 }
