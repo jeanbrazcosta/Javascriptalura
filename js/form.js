@@ -23,7 +23,7 @@ botaoAdicionar.addEventListener("click", function(event) {
     tabela.appendChild(pacienteTr);
 //limpando formulário
     form.reset();
-selecionando id
+//selecionando id
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
 
