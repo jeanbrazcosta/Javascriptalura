@@ -1,21 +1,20 @@
-//selecionando campo
 var campoFiltro = document.querySelector("#filtrar-tabela");
-//evento para escutar quando usuário está digitando
+//adicionando evento imput que escuta quando usuário está digitando
 campoFiltro.addEventListener("input", function() {
-//selecionando todos os pacientes
     var pacientes = document.querySelectorAll(".paciente");
-//identificando se existe algo digitado se não, não entrará no for
+//if para saber se existe algo digitado se não houver não entra no for
     if (this.value.length > 0) {
         for (var i = 0; i < pacientes.length; i++) {
             var paciente = pacientes[i];
             var tdNome = paciente.querySelector(".info-nome");
             var nome = tdNome.textContent;
-            
+            //Criando variavel com a expressão regular e testa se é case 
             var expressao = new RegExp(this.value, "i");
-//comparando se o que foi digitado bate com o que tem na tabela
-            if (expressao.test(nome)) {
-                paciente.classList.remove("invisivel");            } else {
+//. test serve para testar se o que foi idigitado é igual a expressão regular ou seja com o que está na tabela
+            if (!expressao.test(nome)) {
                 paciente.classList.add("invisivel");
+            } else {
+                paciente.classList.remove("invisivel");
             }
         }
     } else {
@@ -25,5 +24,3 @@ campoFiltro.addEventListener("input", function() {
         }
     }
 });
-
-

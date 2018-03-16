@@ -1,36 +1,30 @@
-//selecionando botão
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
-//escuando click no botão e mudando comportamento padrão
 botaoAdicionar.addEventListener("click", function(event) {
     event.preventDefault();
-//selecionando formulário
+
     var form = document.querySelector("#form-adiciona");
-//chamando função passando formulário como parâmetro
+
     var paciente = obtemPacienteDoFormulario(form);
-//chamando função montaTr
-    var pacienteTr = montaTr(paciente);
-//chamando função
+
     var erros = validaPaciente(paciente);
-//logica para atribuir mensagem de erro com o campo
+
     if (erros.length > 0) {
         exibeMensagensDeErro(erros);
 
         return;
     }
 
-    var tabela = document.querySelector("#tabela-pacientes");
+    adicionaPacienteNaTabela(paciente);
 
-    tabela.appendChild(pacienteTr);
-//limpando formulário
     form.reset();
-//selecionando id
+
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
 
 });
 
 function obtemPacienteDoFormulario(form) {
-//criando objeto paciente
+
     var paciente = {
         nome: form.nome.value,
         peso: form.peso.value,
@@ -70,7 +64,7 @@ function validaPaciente(paciente) {
     if (paciente.nome.length == 0) {
         erros.push("O nome não pode ser em branco");
     }
-//adicionando no array o erro específico
+
     if (paciente.gordura.length == 0) {
         erros.push("A gordura não pode ser em branco");
     }
@@ -103,4 +97,10 @@ function exibeMensagensDeErro(erros) {
         li.textContent = erro;
         ul.appendChild(li);
     });
+}
+
+function adicionaPacienteNaTabela(paciente) {
+    var pacienteTr = montaTr(paciente);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
 }
